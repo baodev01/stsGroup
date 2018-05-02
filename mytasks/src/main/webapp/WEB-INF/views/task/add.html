@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <div th:include="templates/header"></div>
+    <script>
+
+        $(function() {
+            $('.datepicker_input').datepicker({
+                format: 'mm/dd/yyyy',
+                todayBtn: "linked",
+                todayHighlight: true,
+                toggleActive: true,
+                autoclose: true
+            });
+        });
+    </script>
+</head>
+<body>
+<h1>Add Task</h1>
+
+<div id="wrap">
+    <form th:action="@{/task/save}" method="post" th:object="${task}">
+        <fieldset>
+            <table class="table table-bordered">
+                <tbody>
+                <tr>
+                    <th>Task Name</th>
+                        <td><input class="form-control" type="text" th:field="*{task_name}" name="task_name" /></td></tr>
+                <tr><th>Task Type</th>
+                        <td><select class="custom-select" name="task_type">
+                            <option value="0" selected>Choose...</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select></td></tr>
+                <tr><th>Date Event</th>
+                        <td><input type="text" class="datepicker_input form-control" name="date_event" ></td></tr>
+                <tr><th>Date Event (lunar)</th>
+                        <td><input type="text" class="datepicker_input form-control" name="date_event_lunar" ></td></tr>
+                <tr><th>Event Lunar</th>
+                        <td><select class="custom-select" name="event_lunar">
+                            <option value="0" selected>No</option>
+                            <option value="1">Yes</option>
+                        </select></td></tr>
+                <tr><th>Color</th>
+                        <td><input class="form-control" type="text" name="task_color" /></td></tr>
+                <tr><th>Note</th>
+                        <td><input class="form-control" type="textarea" name="note" /></td></tr>
+                <tr><td colspan="2" class="text-center"><input type="submit" class="btn btn-outline-success" value="Save" /></td></tr>
+                </tbody>
+            </table>
+        </fieldset>
+    </form>
+</div>
+<div th:include="templates/footer :: footer"></div>
+</body>
+</html>

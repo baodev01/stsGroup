@@ -1,15 +1,15 @@
 buildscript {
-	ext {
-		springBootVersion = '2.1.0.BUILD-SNAPSHOT'
-	}
-	repositories {
-		mavenCentral()
-		maven { url "https://repo.spring.io/snapshot" }
-		maven { url "https://repo.spring.io/milestone" }
-	}
-	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-	}
+    ext {
+        springBootVersion = '2.1.0.BUILD-SNAPSHOT'
+    }
+    repositories {
+        mavenCentral()
+        maven { url "https://repo.spring.io/snapshot" }
+        maven { url "https://repo.spring.io/milestone" }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
 }
 
 apply plugin: 'java'
@@ -24,27 +24,50 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 repositories {
-	mavenCentral()
-	maven { url "https://repo.spring.io/snapshot" }
-	maven { url "https://repo.spring.io/milestone" }
+    mavenCentral()
+    maven { url "https://repo.spring.io/snapshot" }
+    maven { url "https://repo.spring.io/milestone" }
 }
 
 war {
-	baseName = 'mytasks'
-	version =  '1.0.0'
-	enabled = true
+    baseName = 'mytasks'
+    version =  '1.0.0'
+    enabled = true
 }
 
 
 dependencies {
-	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
-	compile('org.springframework.boot:spring-boot-starter-web')
-	compile('org.springframework:spring-context:5.0.5.RELEASE')
-	// https://mvnrepository.com/artifact/org.thymeleaf/thymeleaf-spring5
-	//compile(group: 'org.thymeleaf', name: 'thymeleaf-spring5', version: '3.0.9.RELEASE')
-	runtime('org.springframework.boot:spring-boot-devtools')
-	runtime('mysql:mysql-connector-java')
-	testCompile('org.springframework.boot:spring-boot-starter-test')
-	// https://mvnrepository.com/artifact/org.webjars/bootstrap
-	compile group: 'org.webjars', name: 'bootstrap', version: '4.1.0'
+
+    runtime('org.springframework.boot:spring-boot-devtools')
+
+    compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.11'
+    compile group: 'org.webjars', name: 'jquery', version: '3.3.1'
+    compile group: 'org.webjars', name: 'bootstrap', version: '4.1.0'
+    compile group: 'org.webjars', name: 'bootstrap-datepicker', version: '1.8.0'
+//    compile group: 'org.webjars.bower', name: 'components-bootstrap', version: '3.2.0'
+    compile('org.springframework.boot:spring-boot-starter-web')
+    compile('org.springframework:spring-core:5.0.5.RELEASE')
+    compile('org.springframework:spring-context:5.0.5.RELEASE')
+    compile('org.springframework:spring-beans:5.0.5.RELEASE')
+    compile('org.springframework:spring-tx:5.0.5.RELEASE')
+//    compile('org.springframework:spring-aop:5.0.5.RELEASE')
+    compile('org.springframework:spring-orm:5.0.5.RELEASE')
+    compile('org.springframework:spring-jdbc:5.0.5.RELEASE')
+    compile('org.springframework:spring-webmvc:5.0.5.RELEASE')
+    compile('org.springframework:spring-web:5.0.5.RELEASE')
+
+    compile group: 'org.hibernate', name: 'hibernate-core', version: '5.2.17.Final'
+//    compile group: 'org.hibernate.common', name: 'hibernate-commons-annotations', version: '5.0.3.Final'
+    compile group: 'org.hibernate', name: 'hibernate-c3p0', version: '5.2.17.Final'
+    compile group: 'org.hibernate', name: 'hibernate-entitymanager', version: '5.2.17.Final'
+//    compile group: 'org.hibernate', name: 'hibernate-validator', version: '5.2.17.Final'
+
+    compile group: 'javax.servlet', name: 'jstl', version: '1.2'
+    compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
+
+    compile group: 'org.thymeleaf', name: 'thymeleaf', version: '3.0.9.RELEASE'
+    compile group: 'org.thymeleaf', name: 'thymeleaf-spring5', version: '3.0.9.RELEASE'
+
+
+//    testCompile('org.springframework.boot:spring-boot-starter-test')
 }

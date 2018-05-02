@@ -12,10 +12,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
+import org.thymeleaf.templatemode.TemplateMode;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan("sts.com.vn.mytasks.controller")
+@ComponentScan(value={"sts.com.vn.mytasks"})
+//@EntityScan(value={"sts.com.vn.mytasks.model"})
 public class MvcWebConfig implements WebMvcConfigurer {
 
     @Autowired
@@ -30,6 +32,8 @@ public class MvcWebConfig implements WebMvcConfigurer {
         templateResolver.setApplicationContext(applicationContext);
         templateResolver.setPrefix("/WEB-INF/views/");
         templateResolver.setSuffix(".html");
+        templateResolver.setTemplateMode(TemplateMode.HTML);
+        templateResolver.setCharacterEncoding("UTF-8");
         return templateResolver;
     }
 
@@ -51,6 +55,8 @@ public class MvcWebConfig implements WebMvcConfigurer {
     public void configureViewResolvers(ViewResolverRegistry registry) {
         ThymeleafViewResolver resolver = new ThymeleafViewResolver();
         resolver.setTemplateEngine(templateEngine());
+        resolver.setOrder(1);
+        resolver.setCharacterEncoding("UTF-8");
         registry.viewResolver(resolver);
     }
 
@@ -61,6 +67,20 @@ public class MvcWebConfig implements WebMvcConfigurer {
         //
         // http://somedomain/SomeContextPath/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css
         //
-        registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
+        if (!registry.hasMappingForPattern("/webjars/**")) {
+            registry.addResourceHandler("/webjars/**").addResourceLocations(
+                    "classpath:/META-INF/resources/webjars/");
+        }
+
+//        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/**");
+        // Register resource handler for CSS and JS
+//        registry.addResourceHandler("/resources/**").addResourceLocations("classpath:/statics/");
+//                //.setCacheControl(CacheControl.maxAge(2, TimeUnit.HOURS).cachePublic());
+//        registry.addResourceHandler("/resources/**").addResourceLocations("classpath:/config/");
+
+//        // Register resource handler for images
+//        registry.addResourceHandler("/images/**").addResourceLocations("/WEB-INF/images/")
+//                .setCacheControl(CacheControl.maxAge(2, TimeUnit.HOURS).cachePublic());
     }
+
 }
