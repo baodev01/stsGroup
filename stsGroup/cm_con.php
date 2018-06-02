@@ -9,7 +9,7 @@ class CMyPDO extends PDO {
     static function getConnection() {
         $conn=null;
         try {
-        	$host = "localhost";
+        	$host = "localhost:3306";
 			$user = "thiep_stsprint";
 			$pass = "123456a-";
 			$dbname = "thiepcuoithanhphong_com_sts_printsdb";
